@@ -14,8 +14,9 @@ public class AeropuertoDAOImpl implements AeropuertoDAO {
     @Override
     public List<AeropuertoEntity> findAll() throws SQLException {
         List<AeropuertoEntity> aeropuertos = new ArrayList<>();
-        String sql = "select a.id_aeropuerto, a.cod_iata, a.nombre, a.ciudad " +
-                "from aeropuertos a  ";
+        String sql = "SELECT a.id_aeropuerto, a.cod_iata, a.nombre, a.ciudad " +
+                "FROM aeropuertos a " +
+                "ORDER BY a.id_aeropuerto";
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
