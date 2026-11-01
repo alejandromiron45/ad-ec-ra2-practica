@@ -1,5 +1,7 @@
 package org.educa.service;
 
+import org.educa.dao.VueloDAO;
+import org.educa.dao.VueloDAOImpl;
 import org.educa.entity.AeropuertoEntity;
 import org.educa.entity.VueloEntity;
 
@@ -9,9 +11,10 @@ import java.util.List;
 
 public class VueloService {
 
+    VueloDAO vueloDAO = new VueloDAOImpl();
 
     public List<VueloEntity> findByOrigen(AeropuertoEntity origen) throws SQLException {
-        return null;
+        return vueloDAO.findByOrigen(origen);
     }
 
     public BigDecimal getPrecioBase(VueloEntity vuelo) {
