@@ -12,6 +12,7 @@ import java.util.List;
 public class AsientoService {
 
     private final AsientoDAO asientoDAO = new AsientoDAOImpl();
+
     public List<AsientoEntity> findDisponibles(VueloEntity vuelo) throws SQLException {
         List<AsientoEntity> asientos = asientoDAO.findDisponibles(vuelo);
         for (AsientoEntity asiento : asientos) {
