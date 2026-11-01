@@ -29,7 +29,6 @@ public class ReservaDAOImpl implements ReservaDAO {
                     reserva.setIdReserva(rs.getInt("id_reserva"));
                     reserva.setCodReserva(rs.getString("cod_reserva"));
                     reserva.setFecReserva(rs.getObject("fec_reserva", LocalDateTime.class));
-                    ;
                     reserva.setEstado(rs.getString("estado"));
                     list.add(reserva);
                 }
