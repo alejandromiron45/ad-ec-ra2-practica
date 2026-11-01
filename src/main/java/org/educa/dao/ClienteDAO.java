@@ -2,8 +2,10 @@ package org.educa.dao;
 
 import org.educa.entity.ClienteEntity;
 
-public interface ClienteDAO {
-    ClienteEntity findByDni(String dni);
+import java.sql.SQLException;
 
-    void saveCliente(ClienteEntity cliente);
+public interface ClienteDAO {
+    ClienteEntity findByDni(String dni) throws SQLException;
+
+    void saveCliente(ClienteEntity cliente) throws SQLException;
 }
