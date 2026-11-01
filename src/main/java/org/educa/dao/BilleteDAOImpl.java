@@ -8,8 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class BilleteDAOImpl implements BilleteDAO {
+
     @Override
-    public void save(Connection connection, BilleteEntity billete) throws SQLException, SQLException {
+    public void save(Connection connection, BilleteEntity billete) throws SQLException {
         String sql = "INSERT INTO billetes (id_pasajero, id_vuelo, id_asiento, precio) " +
                 "VALUES (?,?,?,?) " +
                 "RETURNING id_billete";

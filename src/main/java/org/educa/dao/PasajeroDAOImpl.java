@@ -5,6 +5,7 @@ import org.educa.entity.PasajeroEntity;
 import java.sql.*;
 
 public class PasajeroDAOImpl implements PasajeroDAO {
+
     @Override
     public void save(Connection connection, PasajeroEntity pasajero) throws SQLException {
         String sql = "INSERT INTO pasajeros (id_reserva, dni, nombre, p_apellido, s_apellido, email, telefono, fec_nac) " +
