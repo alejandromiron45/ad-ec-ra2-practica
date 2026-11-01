@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public ClienteEntity findByDni(String dni) throws SQLException {
-        String sql = "SELECT * FROM CLIENTES c" +
+        String sql = "SELECT * FROM clientes c " +
                 "WHERE c.dni = ?";
 
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
@@ -38,20 +38,24 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public void saveCliente(ClienteEntity cliente) throws SQLException {
-        String sql = "INSERT INTO clientes " +
-                "VALUES(?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO clientes (dni, nombre, p_apellido, s_apellido, email, telefono) " +
+                "VALUES (?,?,?,?,?,?) " +
+                "RETURNING id_cliente";
 
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.setInt(1, cliente.getIdCliente());
-            ps.setString(2, cliente.getDni());
-            ps.setString(3, cliente.getNombre());
-            ps.setString(4, cliente.getPrimerApellido());
-            ps.setString(5, cliente.getSegundoApellido());
-            ps.setString(6, cliente.getEmail());
-            ps.setString(7, cliente.getTelefono());
+            ps.setString(1, cliente.getDni());
+            ps.setString(2, cliente.getNombre());
+            ps.setString(3, cliente.getPrimerApellido());
+            ps.setString(4, cliente.getSegundoApellido());
+            ps.setString(5, cliente.getEmail());
+            ps.setString(6, cliente.getTelefono());
 
-            ps.executeUpdate();
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    cliente.setIdCliente(rs.getInt("id_cliente"));
+                }
+            }
         }
     }
 }
