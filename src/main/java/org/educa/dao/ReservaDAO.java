@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReservaDAO {
     List<ReservaEntity> findReservaByCliente(ClienteEntity cliente) throws SQLException;
 
-    boolean existsByCodigo(Connection connection, String codigo);
+    boolean existsByCodigo(Connection connection, String codigo) throws SQLException;
 
-    void save(Connection connection, ReservaEntity reserva);
+    void save(Connection connection, ReservaEntity reserva) throws SQLException;
 }

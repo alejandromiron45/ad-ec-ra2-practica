@@ -36,4 +36,30 @@ public class ReservaDAOImpl implements ReservaDAO {
         }
         return list;
     }
+    @Override
+    public void save(Connection connection, ReservaEntity reserva) throws SQLException {
+        String sql = "INSERT INTO reservas (cod_reserva, id_cliente) " +
+                "VALUES (?,?) " +
+                "RETURNING id_reserva";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, reserva.getCodReserva());
+            ps.setInt(2, reserva.getCliente().getIdCliente());
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    reserva.setIdReserva(rs.getInt("id_reserva"));
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean existsByCodigo(Connection connection, String codReserva) throws SQLException {
+        String sql = "SELECT 1 FROM reservas r WHERE r.cod_reserva = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, codReserva);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
 }
