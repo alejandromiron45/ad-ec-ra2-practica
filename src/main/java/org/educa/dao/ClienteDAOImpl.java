@@ -17,8 +17,8 @@ public class ClienteDAOImpl implements ClienteDAO {
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, dni);
-            try(ResultSet rs = ps.executeQuery()) {
-                if(rs.next()){
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
                     ClienteEntity cliente = new ClienteEntity();
                     cliente.setIdCliente(rs.getInt("id_cliente"));
                     cliente.setDni(rs.getString("dni"));
@@ -28,7 +28,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                     cliente.setEmail(rs.getString("email"));
                     cliente.setTelefono(rs.getString("telefono"));
                     return cliente;
-                }else{
+                } else {
                     return null;
                 }
             }
@@ -36,10 +36,24 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     }
 
-        @Override
-        public void saveCliente (ClienteEntity cliente){
+    @Override
+    public void saveCliente(ClienteEntity cliente) throws SQLException {
+        String sql = "INSERT INTO clientes " +
+                "VALUES(?,?,?,?,?,?,?)";
 
+        try (Connection connection = ConnectionPool.getDataSource().getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, cliente.getIdCliente());
+            ps.setString(2, cliente.getDni());
+            ps.setString(3, cliente.getNombre());
+            ps.setString(4, cliente.getPrimerApellido());
+            ps.setString(5, cliente.getSegundoApellido());
+            ps.setString(6, cliente.getEmail());
+            ps.setString(7, cliente.getTelefono());
+
+            ps.executeUpdate();
         }
-
     }
+}
+
 
