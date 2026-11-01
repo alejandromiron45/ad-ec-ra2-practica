@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="file://$PROJECT_DIR$/src/main/java/org/educa/dao/AeropuertoDAOImpl.java" value="16787aa8-68ee-47ba-93f4-b755ba735528" />
     <file url="file://$PROJECT_DIR$/src/main/java/org/educa/dao/ReservaDAOImpl.java" value="16787aa8-68ee-47ba-93f4-b755ba735528" />
   </component>
 </project>
