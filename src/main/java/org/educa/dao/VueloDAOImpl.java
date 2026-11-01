@@ -15,22 +15,39 @@ public class VueloDAOImpl implements VueloDAO {
     @Override
     public List<VueloEntity> findByOrigen(AeropuertoEntity origen) throws SQLException {
         List<VueloEntity> vuelos = new ArrayList<>();
-        String sql = "SELECT v.num_vuelo, ao.cod_iata AS cod_iata_origen, " +
-                "ad.cod_iata AS cod_iata_destino, v.fec_salida, v.fec_llegada,  ad.ciudad  as ciudad_destino " +
+        String sql = "SELECT v.id_vuelo, v.num_vuelo, v.id_avion, v.fec_salida, v.fec_llegada, v.estado, " +
+                "ad.id_aeropuerto AS id_destino, ad.cod_iata AS cod_iata_destino, " +
+                "ad.nombre AS nombre_destino, ad.ciudad AS ciudad_destino " +
                 "FROM vuelos v " +
-                "INNER JOIN aeropuertos ao ON v.id_origen = ao.id_aeropuerto " +
                 "INNER JOIN aeropuertos ad ON v.id_destino = ad.id_aeropuerto " +
-                "WHERE v.id_origen = ? " +
+                "WHERE v.id_origen = ? AND v.estado <> 'CANCELADO' " +
                 "ORDER BY v.fec_salida";
+
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
+
+            ps.setInt(1, origen.getIdAeropuerto());
+
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     VueloEntity vuelo = new VueloEntity();
+                    vuelo.setIdVuelo(rs.getInt("id_vuelo"));
+                    vuelo.setNumVuelo(rs.getString("num_vuelo"));
+                    vuelo.setIdAvion(rs.getInt("id_avion"));
+                    vuelo.setOrigen(origen);
 
+                    AeropuertoEntity destino = new AeropuertoEntity();
+                    destino.setIdAeropuerto(rs.getInt("id_destino"));
+                    destino.setCodIata(rs.getString("cod_iata_destino"));
+                    destino.setNombre(rs.getString("nombre_destino"));
+                    destino.setCiudad(rs.getString("ciudad_destino"));
+                    vuelo.setDestino(destino);
+
+                    vuelo.setFecSalida(rs.getTimestamp("fec_salida").toLocalDateTime());
+                    vuelo.setFecLlegada(rs.getTimestamp("fec_llegada").toLocalDateTime());
+                    vuelo.setEstado(rs.getString("estado"));
                     vuelos.add(vuelo);
                 }
-
             }
         }
         return vuelos;
