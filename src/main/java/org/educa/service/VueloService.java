@@ -6,7 +6,9 @@ import org.educa.entity.AeropuertoEntity;
 import org.educa.entity.VueloEntity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.util.List;
 
 public class VueloService {
@@ -18,6 +20,9 @@ public class VueloService {
     }
 
     public BigDecimal getPrecioBase(VueloEntity vuelo) {
-        return null;
+        long minutos = Duration.between(vuelo.getFecSalida(), vuelo.getFecLlegada()).toMinutes();
+        return BigDecimal.valueOf(minutos)
+                .multiply(new BigDecimal("0.75"))
+                .setScale(2, RoundingMode.HALF_UP);
     }
 }
