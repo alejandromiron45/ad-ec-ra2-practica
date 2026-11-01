@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaDAOImpl implements ReservaDAO {
+
     @Override
     public List<ReservaEntity> findReservaByCliente(ClienteEntity cliente) throws SQLException {
         List<ReservaEntity> list = new ArrayList<>();
@@ -36,6 +37,7 @@ public class ReservaDAOImpl implements ReservaDAO {
         }
         return list;
     }
+
     @Override
     public void save(Connection connection, ReservaEntity reserva) throws SQLException {
         String sql = "INSERT INTO reservas (cod_reserva, id_cliente) " +
