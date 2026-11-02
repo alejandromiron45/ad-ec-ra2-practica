@@ -13,7 +13,7 @@ import java.util.List;
 
 public class VueloService {
 
-    VueloDAO vueloDAO = new VueloDAOImpl();
+    private final VueloDAO vueloDAO = new VueloDAOImpl();
 
     public List<VueloEntity> findByOrigen(AeropuertoEntity origen) throws SQLException {
         return vueloDAO.findByOrigen(origen);
