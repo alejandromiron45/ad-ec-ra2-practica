@@ -7,10 +7,19 @@ import org.educa.entity.AeropuertoEntity;
 import java.sql.SQLException;
 import java.util.List;
 
+/**
+ * Servicio de consulta de aeropuertos.
+ */
 public class AeropuertoService {
 
     private final AeropuertoDAO aeropuertoDAO = new AeropuertoDAOImpl();
 
+    /**
+     * Obtiene todos los aeropuertos registrados en el sistema.
+     *
+     * @return lista de aeropuertos ordenada por identificador
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     public List<AeropuertoEntity> findAll() throws SQLException {
         return aeropuertoDAO.findAll();
     }
