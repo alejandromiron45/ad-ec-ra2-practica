@@ -16,10 +16,14 @@ import java.util.List;
  */
 public class VueloService {
 
-    /** Precio base por cada minuto de vuelo, en euros. */
+    /**
+     * Precio base por cada minuto de vuelo, en euros.
+     */
     private static final BigDecimal PRECIO_POR_MINUTO = new BigDecimal("0.75");
 
-    /** Número de decimales del precio base. */
+    /**
+     * Número de decimales del precio base.
+     */
     private static final int ESCALA_PRECIO = 2;
 
     private final VueloDAO vueloDAO = new VueloDAOImpl();

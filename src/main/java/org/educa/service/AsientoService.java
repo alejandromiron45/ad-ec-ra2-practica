@@ -15,7 +15,9 @@ import java.util.Map;
  */
 public class AsientoService {
 
-    /** Suplemento en euros de cada clase de asiento. */
+    /**
+     * Suplemento en euros de cada clase de asiento.
+     */
     private static final Map<String, BigDecimal> SUPLEMENTOS = Map.of(
             "TURISTA", new BigDecimal("0.00"),
             "PREMIUM_ECONOMY", new BigDecimal("35.00"),
@@ -23,21 +25,6 @@ public class AsientoService {
             "FIRST", new BigDecimal("250.00"));
 
     private final AsientoDAO asientoDAO = new AsientoDAOImpl();
-
-    /**
-     * Obtiene los asientos libres de un vuelo, con su suplemento asignado.
-     *
-     * @param vuelo vuelo del que se buscan asientos disponibles
-     * @return lista de asientos libres
-     * @throws SQLException si se produce un error al consultar la base de datos
-     */
-    public List<AsientoEntity> findDisponibles(VueloEntity vuelo) throws SQLException {
-        List<AsientoEntity> asientos = asientoDAO.findDisponibles(vuelo);
-        for (AsientoEntity asiento : asientos) {
-            asiento.setSuplemento(getSuplemento(asiento.getClase()));
-        }
-        return asientos;
-    }
 
     /**
      * Devuelve el suplemento asociado a una clase de asiento.
@@ -52,5 +39,20 @@ public class AsientoService {
             throw new IllegalArgumentException("Clase de asiento desconocida: " + clase);
         }
         return suplemento;
+    }
+
+    /**
+     * Obtiene los asientos libres de un vuelo, con su suplemento asignado.
+     *
+     * @param vuelo vuelo del que se buscan asientos disponibles
+     * @return lista de asientos libres
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
+    public List<AsientoEntity> findDisponibles(VueloEntity vuelo) throws SQLException {
+        List<AsientoEntity> asientos = asientoDAO.findDisponibles(vuelo);
+        for (AsientoEntity asiento : asientos) {
+            asiento.setSuplemento(getSuplemento(asiento.getClase()));
+        }
+        return asientos;
     }
 }

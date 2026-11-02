@@ -16,19 +16,29 @@ import java.time.Period;
  */
 public class BilleteService {
 
-    /** Edad por debajo de la cual se aplica el descuento infantil. */
+    /**
+     * Edad por debajo de la cual se aplica el descuento infantil.
+     */
     private static final int EDAD_INFANTIL = 12;
 
-    /** Número de reservas previas por encima del cual se aplica el descuento por fidelidad. */
+    /**
+     * Número de reservas previas por encima del cual se aplica el descuento por fidelidad.
+     */
     private static final int RESERVAS_PARA_DESCUENTO = 3;
 
-    /** Factor aplicado al precio con descuento infantil del 20 %. */
+    /**
+     * Factor aplicado al precio con descuento infantil del 20 %.
+     */
     private static final BigDecimal FACTOR_DESCUENTO_INFANTIL = new BigDecimal("0.80");
 
-    /** Factor aplicado al precio con descuento por reservas previas del 10 %. */
+    /**
+     * Factor aplicado al precio con descuento por reservas previas del 10 %.
+     */
     private static final BigDecimal FACTOR_DESCUENTO_RESERVAS = new BigDecimal("0.90");
 
-    /** Número de decimales del precio final. */
+    /**
+     * Número de decimales del precio final.
+     */
     private static final int ESCALA_PRECIO = 2;
 
     private final VueloService vueloService = new VueloService();
@@ -38,7 +48,7 @@ public class BilleteService {
      * Calcula el precio final de un billete aplicando el suplemento del asiento
      * y los descuentos infantil y por reservas previas, en ese orden.
      *
-     * @param billete    billete cuyo precio se calcula y se actualiza
+     * @param billete     billete cuyo precio se calcula y se actualiza
      * @param numReservas número de reservas previas del cliente
      */
     public void calculatePrecio(BilleteEntity billete, int numReservas) {
