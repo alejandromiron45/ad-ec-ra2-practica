@@ -11,8 +11,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación JDBC de {@link ReservaDAO}.
+ */
 public class ReservaDAOImpl implements ReservaDAO {
 
+    /**
+     * Obtiene las reservas de un cliente, ordenadas por fecha de reserva.
+     *
+     * @param cliente cliente del que se buscan las reservas
+     * @return lista de reservas del cliente
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     @Override
     public List<ReservaEntity> findReservaByCliente(ClienteEntity cliente) throws SQLException {
         List<ReservaEntity> list = new ArrayList<>();
@@ -38,6 +48,13 @@ public class ReservaDAOImpl implements ReservaDAO {
         return list;
     }
 
+    /**
+     * Inserta una reserva dentro de la conexión recibida y asigna al objeto el identificador generado.
+     *
+     * @param connection conexión con la transacción en curso
+     * @param reserva    reserva a insertar
+     * @throws SQLException si se produce un error al insertar la reserva
+     */
     @Override
     public void save(Connection connection, ReservaEntity reserva) throws SQLException {
         String sql = "INSERT INTO reservas (cod_reserva, id_cliente) " +
@@ -54,6 +71,14 @@ public class ReservaDAOImpl implements ReservaDAO {
         }
     }
 
+    /**
+     * Comprueba si ya existe una reserva con el código indicado.
+     *
+     * @param connection conexión con la transacción en curso
+     * @param codReserva código de reserva a comprobar
+     * @return {@code true} si el código ya existe, {@code false} en caso contrario
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     @Override
     public boolean existsByCodigo(Connection connection, String codReserva) throws SQLException {
         String sql = "SELECT 1 FROM reservas r WHERE r.cod_reserva = ?";

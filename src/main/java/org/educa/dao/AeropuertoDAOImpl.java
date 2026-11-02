@@ -10,7 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación JDBC de {@link AeropuertoDAO}.
+ */
 public class AeropuertoDAOImpl implements AeropuertoDAO {
+
+    /**
+     * Obtiene todos los aeropuertos almacenados, ordenados por identificador.
+     *
+     * @return lista de aeropuertos
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     @Override
     public List<AeropuertoEntity> findAll() throws SQLException {
         List<AeropuertoEntity> aeropuertos = new ArrayList<>();

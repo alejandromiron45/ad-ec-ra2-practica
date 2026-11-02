@@ -11,7 +11,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación JDBC de {@link VueloDAO}.
+ */
 public class VueloDAOImpl implements VueloDAO {
+
+    /**
+     * Obtiene los vuelos que salen de un aeropuerto y no están cancelados, ordenados por fecha de salida.
+     *
+     * @param origen aeropuerto de origen
+     * @return lista de vuelos
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     @Override
     public List<VueloEntity> findByOrigen(AeropuertoEntity origen) throws SQLException {
         List<VueloEntity> vuelos = new ArrayList<>();
