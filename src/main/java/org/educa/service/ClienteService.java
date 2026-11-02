@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class ClienteService {
 
-    ClienteDAO clienteDAO = new ClienteDAOImpl();
+    private final ClienteDAO clienteDAO = new ClienteDAOImpl();
 
     public ClienteEntity findByDNI(String dni) throws SQLException {
         return clienteDAO.findByDni(dni);

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AeropuertoService {
 
-    AeropuertoDAO aeropuertoDAO = new AeropuertoDAOImpl();
+    private final AeropuertoDAO aeropuertoDAO = new AeropuertoDAOImpl();
 
     public List<AeropuertoEntity> findAll() throws SQLException {
         return aeropuertoDAO.findAll();
