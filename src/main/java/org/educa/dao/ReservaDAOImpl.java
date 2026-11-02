@@ -18,8 +18,9 @@ public class ReservaDAOImpl implements ReservaDAO {
     public List<ReservaEntity> findReservaByCliente(ClienteEntity cliente) throws SQLException {
         List<ReservaEntity> list = new ArrayList<>();
         String sql = "SELECT r.id_reserva, r.cod_reserva, r.id_cliente, r.fec_reserva, r.estado " +
-                "FROM RESERVAS r " +
-                "WHERE r.id_cliente = ?";
+                "FROM reservas r " +
+                "WHERE r.id_cliente = ? " +
+                "ORDER BY r.fec_reserva";
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1, cliente.getIdCliente());
@@ -29,7 +30,7 @@ public class ReservaDAOImpl implements ReservaDAO {
                     reserva.setCliente(cliente);
                     reserva.setIdReserva(rs.getInt("id_reserva"));
                     reserva.setCodReserva(rs.getString("cod_reserva"));
-                    reserva.setFecReserva(rs.getObject("fec_reserva", LocalDateTime.class));
+                    reserva.setFecReserva(rs.getTimestamp("fec_reserva").toLocalDateTime());
                     reserva.setEstado(rs.getString("estado"));
                     list.add(reserva);
                 }
