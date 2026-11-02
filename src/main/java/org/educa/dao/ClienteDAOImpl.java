@@ -11,7 +11,8 @@ import java.sql.SQLException;
 public class ClienteDAOImpl implements ClienteDAO {
     @Override
     public ClienteEntity findByDni(String dni) throws SQLException {
-        String sql = "SELECT * FROM clientes c " +
+        String sql = "SELECT c.id_cliente, c.dni, c.nombre, c.p_apellido, c.s_apellido, c.email, c.telefono " +
+                "FROM clientes c " +
                 "WHERE c.dni = ?";
 
         try (Connection connection = ConnectionPool.getDataSource().getConnection();
