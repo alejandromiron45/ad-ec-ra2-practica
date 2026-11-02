@@ -1,6 +1,6 @@
 # ad-ec-ra2-practica
 
-Práctica del RA2 de Acceso a Datos (2º DAM, I.E.S. El Cañaveral): sistema de reservas de vuelos en consola con Java, JDBC y PostgreSQL.
+Práctica del RA2 de Acceso a Datos (2º DAM, I.E.S. El Cañaveral): sistema de reservas de vuelos en Java, BBDD de PostgreSQL.
 
 ## Funcionalidad
 
@@ -29,9 +29,10 @@ db.initialSize=5
 db.maxTotal=10
 ```
 
-## Compilación y ejecución
 
-```bash
-mvn clean verify
-mvn exec:java -Dexec.mainClass="org.educa.Main"
-```
+## Base de datos
+
+Ejecuta los scripts en este orden:
+
+1. `DDL.sql`: crea el esquema, los tipos, las tablas y los índices.
+2. `DML.sql`: carga los datos de prueba.
