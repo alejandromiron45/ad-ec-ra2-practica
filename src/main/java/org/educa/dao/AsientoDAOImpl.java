@@ -11,8 +11,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementación JDBC de {@link AsientoDAO}.
+ */
 public class AsientoDAOImpl implements AsientoDAO {
 
+    /**
+     * Obtiene los asientos del avión del vuelo que no tienen billete vendido para ese vuelo.
+     *
+     * @param vuelo vuelo del que se buscan asientos libres
+     * @return lista de asientos libres ordenada por identificador
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     @Override
     public List<AsientoEntity> findDisponibles(VueloEntity vuelo) throws SQLException {
         List<AsientoEntity> asientos = new ArrayList<>();

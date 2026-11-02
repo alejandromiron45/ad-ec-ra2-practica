@@ -4,8 +4,18 @@ import org.educa.entity.PasajeroEntity;
 
 import java.sql.*;
 
+/**
+ * Implementación JDBC de {@link PasajeroDAO}.
+ */
 public class PasajeroDAOImpl implements PasajeroDAO {
 
+    /**
+     * Inserta un pasajero dentro de la conexión recibida y asigna al objeto el identificador generado.
+     *
+     * @param connection conexión con la transacción en curso
+     * @param pasajero   pasajero a insertar
+     * @throws SQLException si se produce un error al insertar el pasajero
+     */
     @Override
     public void save(Connection connection, PasajeroEntity pasajero) throws SQLException {
         String sql = "INSERT INTO pasajeros (id_reserva, dni, nombre, p_apellido, s_apellido, email, telefono, fec_nac) " +

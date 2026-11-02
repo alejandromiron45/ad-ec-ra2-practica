@@ -16,10 +16,10 @@ import java.time.Period;
  */
 public class BilleteService {
 
-    /** Edad máxima, en años y exclusiva, para aplicar el descuento infantil. */
+    /** Edad por debajo de la cual se aplica el descuento infantil. */
     private static final int EDAD_INFANTIL = 12;
 
-    /** Número de reservas previas a partir del cual se aplica el descuento por fidelidad (exclusivo). */
+    /** Número de reservas previas por encima del cual se aplica el descuento por fidelidad. */
     private static final int RESERVAS_PARA_DESCUENTO = 3;
 
     /** Factor aplicado al precio con descuento infantil del 20 %. */

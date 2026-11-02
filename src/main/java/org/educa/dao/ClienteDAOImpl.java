@@ -8,7 +8,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Implementación JDBC de {@link ClienteDAO}.
+ */
 public class ClienteDAOImpl implements ClienteDAO {
+
+    /**
+     * Busca un cliente por su DNI.
+     *
+     * @param dni DNI del cliente
+     * @return cliente encontrado, o {@code null} si no existe
+     * @throws SQLException si se produce un error al consultar la base de datos
+     */
     @Override
     public ClienteEntity findByDni(String dni) throws SQLException {
         String sql = "SELECT c.id_cliente, c.dni, c.nombre, c.p_apellido, c.s_apellido, c.email, c.telefono " +
@@ -37,6 +48,12 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     }
 
+    /**
+     * Inserta un cliente y asigna al objeto el identificador generado.
+     *
+     * @param cliente cliente a insertar
+     * @throws SQLException si se produce un error al insertar el cliente
+     */
     @Override
     public void saveCliente(ClienteEntity cliente) throws SQLException {
         String sql = "INSERT INTO clientes (dni, nombre, p_apellido, s_apellido, email, telefono) " +
@@ -60,5 +77,3 @@ public class ClienteDAOImpl implements ClienteDAO {
         }
     }
 }
-
-
